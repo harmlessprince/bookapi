@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateBookRequest;
 use App\Http\Resources\BooksResource;
 use App\Http\Resources\BooksResourceCollection;
 use App\Models\Book;
+use Symfony\Component\HttpFoundation\Response;
 
 class BookController extends Controller
 {
@@ -52,7 +53,8 @@ class BookController extends Controller
      */
     public function update(UpdateBookRequest $request, Book $book)
     {
-        //
+        $book->update($request->validated());
+        return $this->respondSuccess($book->refresh(), 200);
     }
 
     /**
@@ -63,6 +65,8 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $name = $book->name;
+        $book->delete();
+        return $this->respondWithMessage(Response::HTTP_NO_CONTENT, Response::HTTP_OK ,"The book " . "'{$name}'" . "was deleted successfully");
     }
 }

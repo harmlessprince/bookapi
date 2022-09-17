@@ -22,6 +22,20 @@ trait ApiResponseTrait
             $status_code
         );
     }
+
+    protected function respondWithMessage(int $status_code, int $response_code ,$message, $status = 'success', $data =  [])
+    {
+        return response()->json(
+            [
+                'status_code' => $status_code,
+                'status' => $status,
+                'message' => $message,
+                'data' => $data,
+            ],
+            $response_code
+        );
+    }
+
     protected function respondValidationErrors(ValidationException $exception): JsonResponse
     {
         return  response()->json(
@@ -48,14 +62,13 @@ trait ApiResponseTrait
     }
 
 
-    protected function apiResponse(string $message, string $status, int $status_code, ...$extra)
+    protected function apiResponse(string $message, string $status, int $status_code)
     {
         return response()->json(
             [
                 'status_code' => $status_code,
                 'status' => $status,
                 'message' => $message,
-
             ],
             $status_code
         );

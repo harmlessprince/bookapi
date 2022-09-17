@@ -42,7 +42,7 @@ class BooksEndpointTest extends TestCase
         $bookFactory = new BookFactory();
         $data = $bookFactory->definition();
         $response = $this->post(route('books.store'), $data);
-        $response->assertStatus(200);
+        $response->assertStatus(201);
     }
      /**
      * A basic unit test example.
