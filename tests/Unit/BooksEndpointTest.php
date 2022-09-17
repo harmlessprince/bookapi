@@ -63,4 +63,14 @@ class BooksEndpointTest extends TestCase
         $response = $this->delete(route('books.destroy', ['book' => $book->id]));
         $response->assertStatus(200);
     }
+
+    /**
+     *
+     * @return void
+     */
+    public function test_endpoint_for_getting_all_external_books_can_be_reached()
+    {
+        $response = $this->get(route('external-books'));
+        $response->assertStatus(200);
+    }
 }
