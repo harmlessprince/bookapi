@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Models\Book;
+use Database\Factories\BookFactory;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -38,7 +39,9 @@ class BooksEndpointTest extends TestCase
      */
     public function test_endpoint_for_creating_an_internal_book_can_be_reached()
     {
-        $response = $this->post(route('books.store'), []);
+        $bookFactory = new BookFactory();
+        $data = $bookFactory->definition();
+        $response = $this->post(route('books.store'), $data);
         $response->assertStatus(200);
     }
      /**

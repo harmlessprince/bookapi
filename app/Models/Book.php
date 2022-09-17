@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
+use DateTimeInterface;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
     use HasFactory;
     protected $casts = [
-        'authors' => AsArrayObject::class
+        'authors' => AsArrayObject::class,
     ];
+    protected $guarded = [];
 }
