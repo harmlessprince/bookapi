@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c94b051f3551b32b0a14f0a46ad177fb",
+    "content-hash": "ccbd816a07b206f971042295b899d1ba",
     "packages": [
         {
             "name": "brick/math",
@@ -1467,16 +1467,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "3.4.0",
+            "version": "3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "5972d2a966e236674286e3a2281139ce74e4415d"
+                "reference": "b7bb46dee497b57e0c378315f2a711824cb46c38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/5972d2a966e236674286e3a2281139ce74e4415d",
-                "reference": "5972d2a966e236674286e3a2281139ce74e4415d",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/b7bb46dee497b57e0c378315f2a711824cb46c38",
+                "reference": "b7bb46dee497b57e0c378315f2a711824cb46c38",
                 "shasum": ""
             },
             "require": {
@@ -1538,7 +1538,7 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem/issues",
-                "source": "https://github.com/thephpleague/flysystem/tree/3.4.0"
+                "source": "https://github.com/thephpleague/flysystem/tree/3.5.0"
             },
             "funding": [
                 {
@@ -1554,7 +1554,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-09-16T20:57:23+00:00"
+            "time": "2022-09-17T21:06:02+00:00"
         },
         {
             "name": "league/mime-type-detection",
@@ -2836,130 +2836,6 @@
                 }
             ],
             "time": "2022-09-16T03:22:46+00:00"
-        },
-        {
-            "name": "sammyjo20/saloon",
-            "version": "v1.4.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sammyjo20/Saloon.git",
-                "reference": "b0387889b10192e8e58e6dcf26325ce138a415c8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sammyjo20/Saloon/zipball/b0387889b10192e8e58e6dcf26325ce138a415c8",
-                "reference": "b0387889b10192e8e58e6dcf26325ce138a415c8",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^7.4",
-                "illuminate/support": "^8.0 || ^9.0",
-                "nesbot/carbon": "^2.58",
-                "php": "^8.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.5",
-                "pestphp/pest": "^1.21",
-                "spatie/ray": "^1.33"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Sammyjo20\\Saloon\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Sam Carré",
-                    "email": "29132017+Sammyjo20@users.noreply.github.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A Laravel/PHP package that allows you to write your API integrations or SDKs in a beautiful, standardised syntax.",
-            "homepage": "https://github.com/sammyjo20/saloon",
-            "keywords": [
-                "api",
-                "api-integrations",
-                "saloon",
-                "sammyjo20",
-                "sdk"
-            ],
-            "support": {
-                "issues": "https://github.com/Sammyjo20/Saloon/issues",
-                "source": "https://github.com/Sammyjo20/Saloon/tree/v1.4.3"
-            },
-            "time": "2022-07-22T21:28:35+00:00"
-        },
-        {
-            "name": "sammyjo20/saloon-laravel",
-            "version": "v1.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sammyjo20/saloon-laravel.git",
-                "reference": "be6b6e5790c8d5410158fdd597ff358b937524ae"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sammyjo20/saloon-laravel/zipball/be6b6e5790c8d5410158fdd597ff358b937524ae",
-                "reference": "be6b6e5790c8d5410158fdd597ff358b937524ae",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/console": "^8.0 || ^9.0",
-                "illuminate/support": "^8.0 || ^9.0",
-                "php": "^8.0",
-                "sammyjo20/saloon": "^1.4"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.5",
-                "orchestra/testbench": "^v6.24.0",
-                "pestphp/pest": "^1.21"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "Saloon": "Saloon"
-                    },
-                    "providers": [
-                        "Sammyjo20\\SaloonLaravel\\SaloonServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sammyjo20\\SaloonLaravel\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Sam Carré",
-                    "email": "29132017+Sammyjo20@users.noreply.github.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Laravel package for Sammyjo20/Saloon",
-            "homepage": "https://github.com/sammyjo20/saloon-laravel",
-            "keywords": [
-                "api",
-                "api-integrations",
-                "saloon",
-                "sammyjo20",
-                "sdk"
-            ],
-            "support": {
-                "issues": "https://github.com/Sammyjo20/saloon-laravel/issues",
-                "source": "https://github.com/Sammyjo20/saloon-laravel/tree/v1.5.0"
-            },
-            "time": "2022-07-22T19:03:49+00:00"
         },
         {
             "name": "symfony/console",

@@ -30,7 +30,7 @@ class BookController extends Controller
     public function store(StoreBookRequest $request)
     {
         $book = Book::create($request->validated());
-        return $this->respondSuccess(['book' => new BooksResource($book)], 201);
+        return $this->respondSuccess(['book' => new BooksResource($book)], 201, 201);
     }
 
     /**
@@ -41,7 +41,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        return $this->respondSuccess(new BooksResource($book), 200);
+        return $this->respondSuccess(new BooksResource($book), 200, 200);
     }
 
     /**
@@ -53,8 +53,15 @@ class BookController extends Controller
      */
     public function update(UpdateBookRequest $request, Book $book)
     {
+        $name  = $book->name;
         $book->update($request->validated());
-        return $this->respondSuccess($book->refresh(), 200);
+        return $this->respondWithMessage(
+            200,
+            200,
+            "The book " . $name . " was updated successfully",
+            'success',
+            new BooksResource($book->refresh()),
+        );
     }
 
     /**
@@ -67,6 +74,6 @@ class BookController extends Controller
     {
         $name = $book->name;
         $book->delete();
-        return $this->respondWithMessage(Response::HTTP_NO_CONTENT, Response::HTTP_OK ,"The book " . "'{$name}'" . "was deleted successfully");
+        return $this->respondWithMessage(Response::HTTP_NO_CONTENT, Response::HTTP_OK, "The book " . "'{$name}'" . " was deleted successfully");
     }
 }

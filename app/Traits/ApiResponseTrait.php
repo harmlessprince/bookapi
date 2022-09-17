@@ -11,7 +11,7 @@ trait ApiResponseTrait
 {
 
 
-    protected function respondSuccess($data, int $status_code)
+    protected function respondSuccess($data, int $status_code, int $response_code)
     {
         return response()->json(
             [
@@ -19,11 +19,11 @@ trait ApiResponseTrait
                 'status' => 'success',
                 'data' => $data,
             ],
-            $status_code
+            $response_code
         );
     }
 
-    protected function respondWithMessage(int $status_code, int $response_code ,$message, $status = 'success', $data =  [])
+    protected function respondWithMessage(int $status_code, int $response_code, $message, $status = 'success', $data =  [])
     {
         return response()->json(
             [
@@ -81,13 +81,13 @@ trait ApiResponseTrait
      * @param array $headers
      * @return JsonResponse
      */
-    protected function respondWithResourceCollection(ResourceCollection $resourceCollection): JsonResponse
+    protected function respondWithResourceCollection(ResourceCollection $resourceCollection, $status_message = 'success',  $status_code = 200): JsonResponse
     {
 
         return response()->json(
             [
-                'status_code' => 200,
-                'status' => 'success',
+                'status_code' => $status_code,
+                'status' => $status_message,
                 'data' => $resourceCollection,
             ],
             200
