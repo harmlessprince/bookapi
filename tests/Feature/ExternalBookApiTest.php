@@ -70,10 +70,33 @@ class ExternalBookApiTest extends TestCase
                     ->where('isbn', '978-0553103540')
                     ->where('authors', ["George R. R. Martin"])
                     ->where('number_of_pages', 694)
-                    ->where('publisher',  'Bantam Books')
+                    ->where('publisher', 'Bantam Books')
                     ->where('release_date', '1995-06-09')
                     ->etc()
                 )->etc()
+            );
+    }
+
+    /**
+     * A basic feature test example.
+     *
+     * @return void
+     * @throws Exception
+     */
+    public function test_it_returns_expected_properties_when_no_data_is_found(): void
+    {
+        $this->withExceptionHandling();
+        Http::preventStrayRequests();
+        $url = IceAndFireApiService::baseUrl . "?name=Bat";
+        Http::fake([
+            $url => Http::response([], 404)
+        ]);
+        // Now we can make our assertions that the endpoint will provide us with the data we expect
+        $this->json('get', route('external-books', ['name' => "Bat"]))
+            ->assertStatus(404)
+            ->assertJson(fn(AssertableJson $json) => $json->has('status_code')->has('status')
+                ->where('status_code', 404)
+                ->missing('data.0')->etc()
             );
     }
 }

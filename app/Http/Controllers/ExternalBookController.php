@@ -23,13 +23,16 @@ class ExternalBookController extends Controller
      */
     public function __invoke(Request $request): JsonResponse
     {
-        $response = IceAndFireApiService::fetch();
-        if ($response->failed()) {
-            return $this->respondWithMessage(Response::HTTP_INTERNAL_SERVER_ERROR, Response::HTTP_INTERNAL_SERVER_ERROR, 'We could not make connection to the api, try again later', 'fail');
+        try {
+            $response = IceAndFireApiService::fetch();
+            if (count($response->object()) < 1) {
+                return $this->respondWithResourceCollection(EmptyResource::collection([]), 'not found', Response::HTTP_NOT_FOUND, Response::HTTP_NOT_FOUND);
+            }else {
+                return $this->respondWithResourceCollection(ExternalBookResource::collection($response->object()));
+            }
+        } catch (Exception $exception) {
+            return $this->respondWithMessage(500, 500, $exception->getMessage(), 'fail');
         }
-        if (count($response->object()) < 1) {
-            return $this->respondWithResourceCollection(EmptyResource::collection([]), 'not found', Response::HTTP_NOT_FOUND, Response::HTTP_NOT_FOUND);
-        }
-        return $this->respondWithResourceCollection(ExternalBookResource::collection($response->object()));
+
     }
 }

@@ -21,7 +21,7 @@ class IceAndFireApiService
             $query = self::buildQuery();
             return Http::accept('application/vnd.anapioficeandfire+json; version=1')->get(self::baseUrl, $query);
         } catch (\Throwable $th) {
-            throw new Exception($th->getMessage(), 1);
+            throw new Exception($th->getMessage(), 500);
         }
     }
 
