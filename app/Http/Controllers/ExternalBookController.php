@@ -33,6 +33,5 @@ class ExternalBookController extends Controller
         } catch (Exception $exception) {
             return $this->respondWithMessage(500, 500, $exception->getMessage(), 'fail');
         }
-
     }
 }

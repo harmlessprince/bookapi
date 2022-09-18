@@ -1,0 +1,79 @@
+version: '3'
+services:
+  #PHP Service
+  app:
+    build:
+      args:
+        user: book-api-user
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: book-api-app
+    container_name: app
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - book-api-app-network
+
+  #Nginx Service
+  webserver:
+    image: nginx:alpine
+    container_name: book_api-server
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "6060:80"
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - book-api-app-network
+
+  #MySQL Service
+  db:
+    image: mysql:5.7.22
+    container_name: book_api-db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3330:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./docker-compose/mysql/my.cnf:/etc/mysql/my.cnf
+    environment:
+      MYSQL_DATABASE: book_api
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_PASSWORD: password
+      MYSQL_USER: root
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - book-api-app-network
+  phpmyadmin:
+    image: phpmyadmin:5.1.0-apache
+    container_name: book-api-phpmyadmin
+    restart: unless-stopped
+    ports: 
+        - 8200:80
+    environment:
+        PMA_HOST: db
+        PMA_PORT: 3306
+        PMA_USER: root
+        PMA_PASSWORD: password
+    networks:
+        - book-api-app-network
+#Volumes
+volumes:
+  dbdata:
+    driver: local
+#Docker Networks
+networks:
+  book-api-app-network:
+    driver: bridge
