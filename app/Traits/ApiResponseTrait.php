@@ -81,7 +81,7 @@ trait ApiResponseTrait
      * @param array $headers
      * @return JsonResponse
      */
-    protected function respondWithResourceCollection(ResourceCollection $resourceCollection, $status_message = 'success',  $status_code = 200): JsonResponse
+    protected function respondWithResourceCollection(ResourceCollection $resourceCollection, $status_message = 'success',  $status_code =  Response::HTTP_OK, $response_code = Response::HTTP_OK): JsonResponse
     {
 
         return response()->json(
@@ -90,7 +90,7 @@ trait ApiResponseTrait
                 'status' => $status_message,
                 'data' => $resourceCollection,
             ],
-            200
+            $response_code
         );
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Resources\ExternalBookResource;
 use App\Services\IceAndFireApiService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Symfony\Component\HttpFoundation\Response;
 
 class ExternalBookController extends Controller
 {
@@ -20,11 +21,12 @@ class ExternalBookController extends Controller
     public function __invoke(Request $request, IceAndFireApiService $iceAndFireApiService)
     {
         $response = $iceAndFireApiService->fetch($request->name);
+        // dd($response->headers());
         if ($response->failed()) {
-            return $this->respondWithMessage(500, 500, 'We could not make connection to the api, try again later', 'fail');
+            return $this->respondWithMessage(Response::HTTP_INTERNAL_SERVER_ERROR, Response::HTTP_INTERNAL_SERVER_ERROR, 'We could not make connection to the api, try again later', 'fail');
         }
         if (count($response->object()) < 1) {
-            return $this->respondWithResourceCollection(EmptyResource::collection([]), 'not found', 404);
+            return $this->respondWithResourceCollection(EmptyResource::collection([]), 'not found', Response::HTTP_NOT_FOUND, Response::HTTP_NOT_FOUND);
         }
         return $this->respondWithResourceCollection(ExternalBookResource::collection($response->object()));
     }
