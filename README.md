@@ -41,7 +41,7 @@ Method | Route | Description | Payload
 `POST` | `/api/v1/books` | store a book in the local database | name, isbn, authors, country, number_of_pages, publisher, release_date | 
 `GET` | `/api/v1/books` | View all books in the local database | |
 `GET` | `/api/v1/books/:id` | Fetch a single book from the local database by supplying book id | |
-`PATCH` | `/api/v1/books/:id` | Update a book in the local database by supplying book id | |
+`PATCH` | `/api/v1/books/:id` | Update a book in the local database by supplying book id | name, isbn, authors, country, number_of_pages, publisher, release_date |
 `DELETE` | `/api/v1/books/:id` | Delete a book from the local database by supplying book id  | |
 `GET` | `/api/external-books` | View all books from the external api | |
 
