@@ -34,7 +34,7 @@ This is a mini rest api that provides endpoints to perform CRUD on books and als
 
 #### NOTE 1: When creating/storing a book resource all payloads are required
 #### NOTE 2: When updating a book resource, all payloads are optional
-#### NOTE 3: When viewing or updating a resource, the id in the url represents the id of the book resource 
+#### NOTE 3: When viewing or updating or deleting a resource, the id in the url represents the id of the book resource 
 
 Method | Route | Description | Payload
 --- | --- | ---|---
