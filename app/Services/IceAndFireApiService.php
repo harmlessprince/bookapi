@@ -2,28 +2,30 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Facades\Http;
+use Exception;
 
-use function PHPUnit\Framework\throwException;
+use GuzzleHttp\Promise\PromiseInterface;
+use Illuminate\Http\Client\Response;
+use Illuminate\Support\Facades\Http;
 
 class IceAndFireApiService
 {
-    private $baseUrl = 'https://www.anapioficeandfire.com/api/books';
-    public function fetch($name)
-    {
+    const baseUrl = 'https://www.anapioficeandfire.com/api/books';
 
+    /**
+     * @throws Exception
+     */
+    public static function fetch(): PromiseInterface|Response
+    {
         try {
-            $query = $this->buildQuery();
-            // if ($name != null && $name != '') {
-            //     $query = array_merge($query, ['name' => $name]);
-            // }
-            return Http::acceptJson()->get($this->baseUrl, $query);
+            $query = self::buildQuery();
+            return Http::accept('application/vnd.anapioficeandfire+json; version=1')->get(self::baseUrl, $query);
         } catch (\Throwable $th) {
-            throwException($th);
+            throw new Exception($th->getMessage(), 1);
         }
     }
-    
-    private function buildQuery()
+
+    private static function buildQuery(): array
     {
         $query = [];
         $name = request('name');
@@ -35,7 +37,7 @@ class IceAndFireApiService
         if ($page != null && $page != '') {
             $query = array_merge($query, ['page' => $page]);
         }
-       
+
         if ($pageSize != null && $pageSize != '') {
             $query = array_merge($query, ['pageSize' => $pageSize]);
         }

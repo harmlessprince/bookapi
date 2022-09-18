@@ -17,7 +17,7 @@ class BookCRUDTest extends TestCase
      *
      * @return void
      */
-    public function test_a_book_can_not_be_created_without_supplying_required_fields()
+    public function test_a_book_can_not_be_created_without_supplying_required_fields(): void
     {
         $response = $this->post(route('books.store'), []);
         $response->assertStatus(422);
@@ -27,7 +27,7 @@ class BookCRUDTest extends TestCase
      *
      * @return void
      */
-    public function test_a_book_can_be_created_by_supplying_required_fields()
+    public function test_a_book_can_be_created_by_supplying_required_fields(): void
     {
         $bookFactory = new BookFactory();
         $data = $bookFactory->definition();
@@ -41,7 +41,7 @@ class BookCRUDTest extends TestCase
      *
      * @return void
      */
-    public function test_a_book_can_be_updated_by_supplying_data()
+    public function test_a_book_can_be_updated_by_supplying_data(): void
     {
         $book = Book::factory()->create();
         sleep(0.5);
@@ -55,7 +55,7 @@ class BookCRUDTest extends TestCase
      *
      * @return void
      */
-    public function test_a_book_can_not_be_updated_by_if_invalid_book_id_is_supplied()
+    public function test_a_book_can_not_be_updated_by_if_invalid_book_id_is_supplied(): void
     {
         $response = $this->patch(route('books.update', ['book' => 10000]), ['name' => "Updated book with new name"]);
         $response->assertStatus(404);
@@ -66,7 +66,7 @@ class BookCRUDTest extends TestCase
      *
      * @return void
      */
-    public function test_a_book_can_be_viewed_by_supplying_a_book_id()
+    public function test_a_book_can_be_viewed_by_supplying_a_book_id(): void
     {
         $book = Book::factory()->create();
         $response = $this->get(route('books.show', ['book' => $book->id]));
@@ -83,7 +83,7 @@ class BookCRUDTest extends TestCase
      *
      * @return void
      */
-    public function test_a_book_can_be_deleted_by_supplying_a_valid_book_id()
+    public function test_a_book_can_be_deleted_by_supplying_a_valid_book_id(): void
     {
         $book = Book::factory()->create();
         $response = $this->delete(route('books.destroy', ['book' => $book->id]));

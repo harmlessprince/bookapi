@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateBookRequest;
 use App\Http\Resources\BooksResource;
 use App\Http\Resources\BooksResourceCollection;
 use App\Models\Book;
+use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class BookController extends Controller
@@ -14,9 +15,9 @@ class BookController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
         return $this->respondWithResourceCollection(new BooksResourceCollection(Book::all()));
     }
@@ -24,10 +25,10 @@ class BookController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreBookRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreBookRequest $request
+     * @return JsonResponse
      */
-    public function store(StoreBookRequest $request)
+    public function store(StoreBookRequest $request): JsonResponse
     {
         $book = Book::create($request->validated());
         return $this->respondSuccess(['book' => new BooksResource($book)], 201, 201);
@@ -36,10 +37,10 @@ class BookController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Book  $book
-     * @return \Illuminate\Http\Response
+     * @param Book $book
+     * @return JsonResponse
      */
-    public function show(Book $book)
+    public function show(Book $book): JsonResponse
     {
         return $this->respondSuccess(new BooksResource($book), 200, 200);
     }
@@ -47,11 +48,11 @@ class BookController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateBookRequest  $request
-     * @param  \App\Models\Book  $book
-     * @return \Illuminate\Http\Response
+     * @param UpdateBookRequest $request
+     * @param Book $book
+     * @return JsonResponse
      */
-    public function update(UpdateBookRequest $request, Book $book)
+    public function update(UpdateBookRequest $request, Book $book): JsonResponse
     {
         $name  = $book->name;
         $book->update($request->validated());
@@ -67,10 +68,10 @@ class BookController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Book  $book
-     * @return \Illuminate\Http\Response
+     * @param Book $book
+     * @return JsonResponse
      */
-    public function destroy(Book $book)
+    public function destroy(Book $book): JsonResponse
     {
         $name = $book->name;
         $book->delete();

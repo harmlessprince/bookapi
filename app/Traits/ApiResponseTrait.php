@@ -11,7 +11,7 @@ trait ApiResponseTrait
 {
 
 
-    protected function respondSuccess($data, int $status_code, int $response_code)
+    protected function respondSuccess($data, int $status_code, int $response_code): JsonResponse
     {
         return response()->json(
             [
@@ -23,7 +23,7 @@ trait ApiResponseTrait
         );
     }
 
-    protected function respondWithMessage(int $status_code, int $response_code, $message, $status = 'success', $data =  [])
+    protected function respondWithMessage(int $status_code, int $response_code, string $message, $status = 'success', $data =  []): JsonResponse
     {
         return response()->json(
             [
@@ -62,7 +62,7 @@ trait ApiResponseTrait
     }
 
 
-    protected function apiResponse(string $message, string $status, int $status_code)
+    protected function apiResponse(string $message, string $status, int $status_code): JsonResponse
     {
         return response()->json(
             [
@@ -76,12 +76,12 @@ trait ApiResponseTrait
 
     /**
      * @param ResourceCollection $resourceCollection
-     * @param null $message
-     * @param int $statusCode
-     * @param array $headers
+     * @param string $status_message
+     * @param int $status_code
+     * @param int $response_code
      * @return JsonResponse
      */
-    protected function respondWithResourceCollection(ResourceCollection $resourceCollection, $status_message = 'success',  $status_code =  Response::HTTP_OK, $response_code = Response::HTTP_OK): JsonResponse
+    protected function respondWithResourceCollection(ResourceCollection $resourceCollection, string $status_message = 'success', int $status_code =  Response::HTTP_OK, int $response_code = Response::HTTP_OK): JsonResponse
     {
 
         return response()->json(
